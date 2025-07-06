@@ -18,7 +18,7 @@ export const goodsFromServer = [
 enum SortType {
   INFO = 'info',
   SUCCESS = 'success',
-  REVERCE = 'warning',
+  REVERSE = 'warning',
 }
 
 const FILTER_INFO = 'info';
@@ -47,7 +47,7 @@ function getPreparedGoods(
 
   if (sortReverce) {
     switch (sortReverce) {
-      case SortType.REVERCE:
+      case SortType.REVERSE:
         return prepareGoods.reverse();
       default:
         return prepareGoods;
@@ -59,11 +59,11 @@ function getPreparedGoods(
 
 export const App: React.FC = () => {
   const [sortField, setSortField] = useState('');
-  const [sortReverce, setSortReverce] = useState('');
+  const [sortReverse, setSortReverse] = useState('');
   const visiableGoods = getPreparedGoods(
     goodsFromServer,
     sortField,
-    sortReverce,
+    sortReverse,
   );
 
   return (
@@ -91,25 +91,25 @@ export const App: React.FC = () => {
 
         <button
           type="button"
-          className={`button is-warning ${sortReverce === REVERSE_WARNING ? '' : 'is-light'}`}
+          className={`button is-warning ${sortReverse === REVERSE_WARNING ? '' : 'is-light'}`}
           onClick={() => {
-            if (sortReverce === '') {
-              setSortReverce(REVERSE_WARNING);
+            if (sortReverse === '') {
+              setSortReverse(REVERSE_WARNING);
             } else {
-              setSortReverce('');
+              setSortReverse('');
             }
           }}
         >
           Reverse
         </button>
 
-        {(sortField !== '' || sortReverce !== '') && (
+        {(sortField !== '' || sortReverse !== '') && (
           <button
             type="button"
             className="button is-danger is-light"
             onClick={() => {
               setSortField('');
-              setSortReverce('');
+              setSortReverse('');
             }}
           >
             Reset
